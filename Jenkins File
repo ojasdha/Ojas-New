@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    environment {
+        // Define environment variables
+        NODE_VERSION = 'v20.13.1'
+    }
+    tools {
+        nodejs "${v20.13.1}"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the source control
+                git 'https://github.com/ojasdha/Ojas-New.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                // Install project dependencies
+                bat 'npm install'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                // Run unit tests
+                bat 'npm test'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Build the project
+                bat 'npm run build'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                bat 'npm run deploy'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'Deployment succeeded!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+        always {
+            cleanWs()
+        }
+    }
+}
+
+
