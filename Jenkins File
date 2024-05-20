@@ -1,8 +1,7 @@
 pipeline {
     agent any
     environment {
-        // Define environment variables
-        NODE_VERSION = 'v20.13.1'
+    NODE_VERSION = 'v20.13.1'
     }
     tools {
         nodejs "${v20.13.1}"
@@ -16,7 +15,6 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                // Install project dependencies
                 bat 'npm install'
             }
         }
