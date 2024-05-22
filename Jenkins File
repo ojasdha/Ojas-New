@@ -6,12 +6,6 @@ pipeline {
     tools {
         nodejs "${v20.13.1}"
     }
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/ojasdha/Ojas-New.git'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
@@ -30,7 +24,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'npm run deploy'
+                sh 'node index.js'
             }
         }
     }
